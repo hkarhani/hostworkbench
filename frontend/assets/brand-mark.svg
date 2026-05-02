@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">Host Workbench mark</title>
+  <desc id="desc">A shield-shaped network mark with an H monogram and connected host nodes.</desc>
+  <defs>
+    <linearGradient id="hw-gradient" x1="14" y1="10" x2="82" y2="86" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#14a88e"/>
+      <stop offset="0.52" stop-color="#0b6f85"/>
+      <stop offset="1" stop-color="#293a7a"/>
+    </linearGradient>
+  </defs>
+  <rect width="96" height="96" rx="22" fill="#10201d"/>
+  <path d="M48 11 78 23v22c0 19.3-12.1 34.8-30 40-17.9-5.2-30-20.7-30-40V23l30-12Z" fill="url(#hw-gradient)"/>
+  <path d="M34 32v32M62 32v32M34 48h28" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M24 36h10M62 60h10M24 60h10M62 36h10" fill="none" stroke="#bdf6e9" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="23" cy="36" r="5" fill="#f8c95c"/>
+  <circle cx="73" cy="36" r="5" fill="#f8c95c"/>
+  <circle cx="23" cy="60" r="5" fill="#f8c95c"/>
+  <circle cx="73" cy="60" r="5" fill="#f8c95c"/>
+</svg>

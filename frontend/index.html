@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0f8b78" />
+    <meta
+      name="description"
+      content="Host Workbench is a visual demo app for testing host inventory API integrations."
+    />
+    <title>Host Workbench</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="stylesheet" href="/styles.css?v=4" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Host Workbench home">
+          <img src="/assets/brand-mark.svg" alt="" />
+          <div>
+            <p class="eyebrow">Forescout Connect API Lab</p>
+            <h1>Host Workbench</h1>
+          </div>
+        </a>
+        <nav class="nav-actions" aria-label="Documentation">
+          <a class="docs-link secondary-link" href="/help">
+            <span class="icon icon-help" aria-hidden="true"></span>
+            Help
+          </a>
+          <a class="docs-link" href="/docs" target="_blank" rel="noreferrer">
+            <span class="icon icon-docs" aria-hidden="true"></span>
+            Public Swagger
+          </a>
+        </nav>
+      </header>
+
+      <section class="toolbar" aria-label="Controls">
+        <form id="api-key-form" class="panel">
+          <div class="panel-heading">
+            <h2>Demo API Key</h2>
+            <span id="key-status" class="status-pill">Ready</span>
+          </div>
+          <label>
+            Label
+            <input id="key-label" type="text" value="Host Workbench Demo Client" autocomplete="off" />
+          </label>
+          <button type="submit">
+            <span class="icon icon-key" aria-hidden="true"></span>
+            Generate API Key
+          </button>
+          <output id="api-key-output" class="secret-output" hidden></output>
+        </form>
+
+        <form id="generate-form" class="panel">
+          <div class="panel-heading">
+            <h2>Generate Hosts</h2>
+            <span id="event-status" class="status-pill live">Live</span>
+          </div>
+          <div class="fields-row">
+            <label>
+              Subnet
+              <input id="subnet" type="text" value="192.0.2.0/24" spellcheck="false" />
+            </label>
+            <label>
+              Hosts
+              <input id="count" type="number" min="1" max="4096" value="10" />
+            </label>
+          </div>
+          <div class="actions">
+            <button type="submit">
+              <span class="icon icon-generate" aria-hidden="true"></span>
+              Generate Hosts
+            </button>
+            <button id="clear-hosts" class="danger-button" type="button">
+              <span class="icon icon-trash" aria-hidden="true"></span>
+              Clear Host Data
+            </button>
+          </div>
+        </form>
+
+        <form id="group-form" class="panel">
+          <div class="panel-heading">
+            <h2>Groups</h2>
+            <span id="group-status" class="status-pill">4 defaults</span>
+          </div>
+          <label>
+            New group
+            <input id="group-name" type="text" placeholder="lab" autocomplete="off" />
+          </label>
+          <button type="submit">
+            <span class="icon icon-group" aria-hidden="true"></span>
+            Add Group
+          </button>
+        </form>
+      </section>
+
+      <section class="summary-strip" aria-label="Summary">
+        <div>
+          <span id="host-count">0</span>
+          <small>hosts</small>
+        </div>
+        <div>
+          <span id="changed-count">0</span>
+          <small>with changes</small>
+        </div>
+        <div>
+          <span id="group-count">0</span>
+          <small>groups</small>
+        </div>
+        <div>
+          <span id="last-refresh">Never</span>
+          <small>last refresh</small>
+        </div>
+      </section>
+
+      <section class="groups-surface" aria-label="Groups">
+        <div class="section-heading">
+          <h2>The Groups</h2>
+          <span id="membership-count" class="status-pill">0 memberships</span>
+        </div>
+        <div id="groups-grid" class="groups-grid">
+          <div class="empty-group-state">No groups yet.</div>
+        </div>
+      </section>
+
+      <section class="host-surface" aria-label="Hosts">
+        <div class="table-wrap">
+          <table id="hosts-table">
+            <thead></thead>
+            <tbody>
+              <tr>
+                <td class="empty-state">No hosts yet.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" hidden></div>
+    <script src="/app.js?v=4"></script>
+  </body>
+</html>

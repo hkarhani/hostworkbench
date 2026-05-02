@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0f8b78" />
+    <meta
+      name="description"
+      content="Host Workbench help for UI workflows, public APIs, authentication, and demo reset behavior."
+    />
+    <title>Host Workbench Help</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="stylesheet" href="/styles.css?v=4" />
+  </head>
+  <body>
+    <main class="shell help-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Host Workbench home">
+          <img src="/assets/brand-mark.svg" alt="" />
+          <div>
+            <p class="eyebrow">Host Workbench Documentation</p>
+            <h1>Help</h1>
+          </div>
+        </a>
+        <nav class="nav-actions" aria-label="Documentation">
+          <a class="docs-link secondary-link" href="/">
+            <span class="icon icon-generate" aria-hidden="true"></span>
+            Workbench
+          </a>
+          <a class="docs-link" href="/docs" target="_blank" rel="noreferrer">
+            <span class="icon icon-docs" aria-hidden="true"></span>
+            Public Swagger
+          </a>
+        </nav>
+      </header>
+
+      <section class="help-grid" aria-label="Help content">
+        <article class="help-panel">
+          <h2>UI Capabilities</h2>
+          <ul>
+            <li>Generate or reuse the persistent demo API key stored in MongoDB.</li>
+            <li>Generate synthetic hosts inside a CIDR subnet such as <code>192.0.2.0/24</code>.</li>
+            <li>Display each host IP address, registration state, and group memberships.</li>
+            <li>Show group cards with host IP membership lists for each group.</li>
+            <li>Add new groups from the GUI; defaults are <code>dev</code>, <code>prod</code>, <code>critical</code>, and <code>isolated</code>.</li>
+            <li>Highlight registration or group changes with the latest timestamp and source metadata.</li>
+            <li>Receive live table refreshes when hosts are generated, created, updated, or cleared.</li>
+            <li>Clear host inventory data while keeping the same API key for repeated demos.</li>
+          </ul>
+        </article>
+
+        <article class="help-panel">
+          <h2>Backend API Capabilities</h2>
+          <ul>
+            <li>Public JWT authentication using a UI-generated API key.</li>
+            <li>Public host listing for external systems consuming inventory data.</li>
+            <li>Public host creation with <code>hostIP</code>, <code>registered</code>, and optional <code>groups</code>.</li>
+            <li>Public host upsert by IP address to flip the registration state.</li>
+            <li>Public endpoints to add or remove an existing host from a group.</li>
+            <li>MongoDB-backed change tracking through <code>fieldChanges.registered</code> and <code>fieldChanges.groups</code>.</li>
+            <li>Internal UI-only routes stay out of the public Swagger document.</li>
+          </ul>
+        </article>
+
+        <article class="help-panel wide">
+          <h2>Public API Flow</h2>
+          <div class="api-flow">
+            <div>
+              <span>1</span>
+              <p>Generate or copy the API key from the Workbench.</p>
+            </div>
+            <div>
+              <span>2</span>
+              <p>Call <code>POST /public/auth/token</code> with <code>X-API-Key</code>.</p>
+            </div>
+            <div>
+              <span>3</span>
+              <p>Use <code>Authorization: Bearer &lt;jwt&gt;</code> for host APIs.</p>
+            </div>
+          </div>
+          <pre><code>curl -k -X POST https://<your-ip>:8443/public/auth/token \
+  -H "X-API-Key: &lt;api-key&gt;"
+
+curl -k https://<your-ip>:8443/public/hosts \
+  -H "Authorization: Bearer &lt;jwt&gt;"
+
+curl -k -X PUT https://<your-ip>:8443/public/hosts/192.0.2.44/groups/critical \
+  -H "Authorization: Bearer &lt;jwt&gt;"</code></pre>
+        </article>
+
+        <article class="help-panel">
+          <h2>Host Data Shape</h2>
+          <pre><code>{
+  "hostIP": "192.0.2.44",
+  "registered": true,
+  "groups": ["prod", "critical"]
+}</code></pre>
+        </article>
+
+        <article class="help-panel">
+          <h2>Demo Notes</h2>
+          <ul>
+            <li>Use <code>Clear Host Data</code> before a new presentation run.</li>
+            <li>The API key survives resets so client scripts do not need to be edited.</li>
+            <li>Open the Workbench beside a terminal to watch registration and group membership changes appear live.</li>
+            <li>Swagger is intentionally limited to public integration endpoints.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
